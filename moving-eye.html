@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moving Eye</title>
+
+    <style>
+        body{
+            background-color: #000;
+            margin: 0;
+            padding: 0;
+        }
+        .face{
+            display: flex;
+            justify-content: space-between;
+        }
+        .wrapper{
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            text-align: center;
+            transform: translateY(-50%);
+        }
+        .eye{
+            width: 240px;
+            height: 120px;
+            background-color: #fff;
+            display: inline-block;
+            margin: 40px;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .ball{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #000;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 15px solid teal;
+        }
+        .shut{
+            width: 300px;
+            height: 160px;
+            background: transparent;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            z-index: 3;
+        }
+        .shut span{
+            display: block;
+            width: 100%;
+            height: 20%;
+            background-color: #ff6b6b;
+            border-radius: 0 0 60% 60%;
+            transition: 0.4s;
+        }
+        @keyframes blink {
+            0%{
+                height: 20%;
+            }
+            50%{
+                height: 100%;
+            }
+            100%{
+                height: 20%;
+            }
+            
+        }
+        .eye:hover .shut span{
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+   
+    <div class="wrapper">
+        <div class="eye">
+            <div class="shut">
+                <span></span>
+            </div>
+            <div class="ball"></div>
+        </div>
+    </div>
+    
+ 
+    
+    <script>
+        let eyeBall = document.querySelector('.ball');
+        document.addEventListener("mousemove",moving);
+        function moving(e){
+            let x = e.clientX * 100/window.innerWidth+"%";
+            let y = e.clientY * 100/window.innerHeight+"%";
+            eyeBall.style.left = x;
+            eyeBall.style.top = y;
+            eyeBall.style.transform = "translate(-"+ x+", -"+y+")";
+        };
+        
+        
+    </script>
+</body>
+</html>
